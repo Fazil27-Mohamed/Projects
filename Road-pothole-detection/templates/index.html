@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pothole Detection AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+
+    <div class="logo">🚧</div>
+
+    <h1>Pothole Detection AI</h1>
+
+    <p class="subtitle">
+        YOLO26 Powered Intelligent Road Safety System
+    </p>
+
+    <form id="uploadForm"
+          action="/predict"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <label class="upload-box">
+
+            <input
+                type="file"
+                id="fileInput"
+                name="image"
+                required
+            >
+
+            <div class="upload-content">
+
+                <div class="icon" id="uploadIcon">
+                    📂
+                </div>
+
+                <h3 id="uploadTitle">
+                    Select Image / Video
+                </h3>
+
+                <p id="fileName">
+                    Click here to browse your files
+                </p>
+
+            </div>
+
+        </label>
+
+        <button id="detectBtn" type="submit">
+            🚀 Detect Pothole
+        </button>
+
+    </form>
+
+
+    {% if image %}
+
+    <div class="result-card">
+
+        <h2>✅ Detection Result</h2>
+
+        <img
+            src="{{ url_for('static', filename=image) }}"
+            class="result-image"
+        >
+
+        <br><br>
+
+        <a
+            class="download-btn"
+            href="{{ url_for('static', filename=image) }}"
+            download
+        >
+            ⬇ Download Image
+        </a>
+
+    </div>
+
+    {% endif %}
+
+
+    {% if video %}
+
+    <div class="result-card">
+
+        <h2>✅ Detection Result</h2>
+
+        <video
+            controls
+            autoplay
+            muted
+            class="result-video">
+
+            <source
+                src="{{ url_for('static', filename=video) }}"
+                type="video/mp4">
+
+        </video>
+
+        <br><br>
+
+        <a
+            class="download-btn"
+            href="{{ url_for('static', filename=video) }}"
+            download>
+
+            ⬇ Download Video
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    const input=document.getElementById("fileInput");
+    const title=document.getElementById("uploadTitle");
+    const file=document.getElementById("fileName");
+    const icon=document.getElementById("uploadIcon");
+    const form=document.getElementById("uploadForm");
+    const button=document.getElementById("detectBtn");
+
+    input.addEventListener("change",function(){
+
+        if(this.files.length>0){
+
+            icon.innerHTML="✅";
+
+            title.innerHTML="File Selected Successfully";
+
+            file.innerHTML=this.files[0].name;
+
+            file.style.color="#22c55e";
+
+            file.style.fontWeight="bold";
+
+        }
+
+    });
+
+    form.addEventListener("submit",function(){
+
+        button.innerHTML="⏳ Detecting Potholes...";
+
+        button.disabled=true;
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
