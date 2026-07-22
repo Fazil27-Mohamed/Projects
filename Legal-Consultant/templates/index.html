@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knock for Law - Legal Consultant</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ⚖️
+            </div>
+
+            <div>
+
+                <h2>Knock for Law</h2>
+
+                <span>Legal Consultant</span>
+
+            </div>
+
+        </div>
+
+        <button class="new-chat" onclick="window.location.href='/'"">
+
+            <i class="fa-solid fa-plus"></i>
+
+            New Chat
+
+        </button>
+
+        <div class="documents">
+
+            <h4>Legal Sources</h4>
+
+            <div class="doc">📘 Constitution</div>
+
+            <div class="doc">⚖️ BNS</div>
+
+            <div class="doc">📄 BNSS</div>
+
+            <div class="doc">📚 BSA</div>
+
+            <div class="doc">🛡 Consumer Act</div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+
+               <h1>Knock for Law ⚖️</h1>
+
+<p>Your AI Legal Assistant for Indian Laws</p>
+
+            </div>
+
+            <div class="status">
+
+                <span class="dot"></span>
+
+                Online
+
+            </div>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <form method="POST" class="search-box">
+
+            <input
+                type="text"
+                name="question"
+                placeholder="Describe your legal issue..."
+                required>
+
+            <button >
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Ask AI
+
+            </button>
+
+        </form>
+        {% if not answer %}
+
+<div class="welcome">
+
+    <h2>Welcome to Knock for Law ⚖️</h2>
+
+    <p>
+        Ask legal questions related to Indian laws.
+        Get answers based on the Constitution, BNS, BNSS,
+        BSA and Consumer Protection Act.
+    </p>
+
+    <div class="examples">
+
+        <div class="example">
+            🏠 My relatives occupied my property.
+        </div>
+
+        <div class="example">
+            🚔 Police refused to register my FIR.
+        </div>
+
+        <div class="example">
+            🛒 I received a defective product.
+        </div>
+
+        <div class="example">
+            📱 Someone hacked my bank account.
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+
+        {% if answer %}
+
+        <div class="chat-area">
+
+            <div class="user-card">
+
+                <div class="avatar user">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <div class="message">
+
+                    {{ request.form.question }}
+
+                </div>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <div class="avatar ai">
+
+                    ⚖️
+
+                </div>
+
+                <div class="message">
+
+                    <pre>{{ answer }}</pre>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
